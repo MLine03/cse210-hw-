@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Handles the prompt logic for the journal.
+/// </summary>
 public class Prompt
 {
+    private static readonly Random _random = new Random();
     private List<string> _prompts;
 
+    /// <summary>
+    /// Initializes the list of predefined prompts.
+    /// </summary>
     public Prompt()
     {
         _prompts = new List<string>()
@@ -17,10 +24,24 @@ public class Prompt
         };
     }
 
+    /// <summary>
+    /// Returns a randomly selected prompt from the list.
+    /// </summary>
     public string GetRandomPrompt()
     {
-        Random rnd = new Random();
-        int index = rnd.Next(_prompts.Count);
+        int index = _random.Next(_prompts.Count);
         return _prompts[index];
+    }
+
+    /// <summary>
+    /// Displays all available prompts to the user.
+    /// </summary>
+    public void ShowAllPrompts()
+    {
+        Console.WriteLine("Available Prompts:");
+        foreach (string prompt in _prompts)
+        {
+            Console.WriteLine($"- {prompt}");
+        }
     }
 }
