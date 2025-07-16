@@ -5,62 +5,50 @@ public class Scripture
 {
     private Reference _reference;
     private List<Word> _words;
+    private Random _random;
 
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
         _words = new List<Word>();
+        _random = new Random();
 
-        string[] wordArray = text.Split(' ');
-        foreach (string word in wordArray)
+        string[] splitWords = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        foreach (string w in splitWords)
         {
-            _words.Add(new Word(word));
+            _words.Add(new Word(w));
         }
     }
 
-    public void HideRandomWords()
+    public void HideRandomWords(int count = 3)
     {
-        Random rand = new Random();
-        int wordsToHide = 3;
+        int hiddenCount = 0;
 
-        List<int> visibleIndexes = new List<int>();
-        for (int i = 0; i < _words.Count; i++)
+        while (hiddenCount < count && !_words.TrueForAll(w => w.IsHidden()))
         {
-            if (!_words[i].IsHidden())
+            int index = _random.Next(_words.Count);
+            if (!_words[index].IsHidden())
             {
-                visibleIndexes.Add(i);
+                _words[index].Hide();
+                hiddenCount++;
             }
-        }
-
-        for (int i = 0; i < wordsToHide && visibleIndexes.Count > 0; i++)
-        {
-            int index = rand.Next(visibleIndexes.Count);
-            _words[visibleIndexes[index]].Hide();
-            visibleIndexes.RemoveAt(index);
         }
     }
 
-    public bool IsCompletelyHidden()
+    public bool AllWordsHidden()
     {
-        foreach (Word word in _words)
-        {
-            if (!word.IsHidden())
-            {
-                return false;
-            }
-        }
-        return true;
+        return _words.TrueForAll(w => w.IsHidden());
     }
 
     public string GetDisplayText()
     {
-        string display = _reference.GetDisplayText() + " - ";
+        string result = _reference.GetDisplayText() + " - ";
 
-        foreach (Word word in _words)
+        foreach (var word in _words)
         {
-            display += word.GetDisplayText() + " ";
+            result += word.GetDisplayText() + " ";
         }
 
-        return display.TrimEnd();
+        return result.Trim();
     }
 }
