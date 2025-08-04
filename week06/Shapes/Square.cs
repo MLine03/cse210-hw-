@@ -1,14 +1,14 @@
 public class Square : Shape
 {
-    private float _side;
+    private double sideLength;
 
-    public Square(string color, float side) : base(color)
+    public Square(string color, double sideLength) : base(color)
     {
-        _side = side;
+        this.sideLength = sideLength;
     }
 
-    public override float GetArea()
+    public override double GetArea()
     {
-        return _side * _side;
+        return sideLength * sideLength;
     }
 }
