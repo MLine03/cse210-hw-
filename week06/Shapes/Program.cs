@@ -9,7 +9,7 @@ public class Program
         {
             new Square("Red", 4),
             new Rectangle("Blue", 3, 5),
-            new Circle("Green", 2.5f)
+            new Circle("Green", 2.5)
         };
 
         foreach (Shape shape in shapes)

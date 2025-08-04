@@ -1,21 +1,14 @@
-public abstract class Shape
+public class Square : Shape
 {
-    private string _color;
+    private double side;
 
-    public Shape(string color)
+    public Square(string color, double side) : base(color)
     {
-        _color = color;
+        this.side = side;
     }
 
-    public string GetColor()
+    public override double GetArea()
     {
-        return _color;
+        return side * side;
     }
-
-    public void SetColor(string color)
-    {
-        _color = color;
-    }
-
-    public abstract float GetArea();
 }

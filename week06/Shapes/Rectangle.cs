@@ -1,16 +1,16 @@
 public class Rectangle : Shape
 {
-    private float _length;
-    private float _width;
+    private double width;
+    private double height;
 
-    public Rectangle(string color, float length, float width) : base(color)
+    public Rectangle(string color, double width, double height) : base(color)
     {
-        _length = length;
-        _width = width;
+        this.width = width;
+        this.height = height;
     }
 
-    public override float GetArea()
+    public override double GetArea()
     {
-        return _length * _width;
+        return width * height;
     }
 }

@@ -2,15 +2,15 @@ using System;
 
 public class Circle : Shape
 {
-    private float _radius;
+    private double radius;
 
-    public Circle(string color, float radius) : base(color)
+    public Circle(string color, double radius) : base(color)
     {
-        _radius = radius;
+        this.radius = radius;
     }
 
-    public override float GetArea()
+    public override double GetArea()
     {
-        return (float)(Math.PI * _radius * _radius);
+        return Math.PI * radius * radius;
     }
 }
